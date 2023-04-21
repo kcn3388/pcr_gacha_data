@@ -39,11 +39,12 @@ def get_data(url: Union[List[str], str], path: Union[List[str], str]):
         else:
             with open(path, 'wb') as file:
                 file.write(res)
-    now = datetime.datetime.now()
-    auto_upload = f"Auto upload in {now}"
-    upload = os.path.join(os.path.dirname(__file__), 'auto_upload.md')
-    with open(upload, 'w', encoding='utf-8') as file:
-        file.write(auto_upload)
+
+    # now = datetime.datetime.now()
+    # auto_upload = f"Auto upload in {now}\n"
+    # upload = os.path.join(os.path.dirname(__file__), 'auto_upload.txt')
+    # with open(upload, 'w', encoding='utf-8') as file:
+    #     file.write(auto_upload)
 
 
 parser = argparse.ArgumentParser(description="select which file to download")
