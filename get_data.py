@@ -23,8 +23,12 @@ def get_data(url: Union[List[str], str], path: Union[List[str], str]):
             res = requests.get(curr_url, timeout=10, headers=headers).content
             if curr_url.endswith(".json"):
                 json_str = json.loads(res.decode("utf-8"))
-                with open(curr_path, 'w', encoding='utf-8') as file:
+                with open(curr_path, 'w+', encoding='utf-8') as file:
                     json.dump(json_str, file, indent=4, ensure_ascii=False)
+            elif "mikan" in curr_url:
+                xml_str = res.decode("utf-8")
+                with open(curr_path, 'w+') as file:
+                    file.write(xml_str)
             else:
                 with open(curr_path, 'wb') as file:
                     file.write(res)
@@ -36,6 +40,10 @@ def get_data(url: Union[List[str], str], path: Union[List[str], str]):
             json_str = json.loads(res.decode("utf-8"))
             with open(path, 'w', encoding='utf-8') as file:
                 json.dump(json_str, file, indent=4, ensure_ascii=False)
+        elif "mikan" in url:
+            xml_str = res.decode("utf-8")
+            with open(path, 'w+') as file:
+                file.write(xml_str)
         else:
             with open(path, 'wb') as file:
                 file.write(res)
