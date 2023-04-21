@@ -73,8 +73,8 @@ if __name__ == "__main__":
     unit_data_path = os.path.join(os.path.dirname(__file__), 'unitdata.py')
     mikan_path = os.path.join(os.path.dirname(__file__), 'mikan.xml')
 
-    url_ = [ver_url, gacha_url, unit_data_url]
-    path_ = [ver_path, gacha_path, unit_data_path]
+    url_ = [ver_url, gacha_url, unit_data_url, mikan_url]
+    path_ = [ver_path, gacha_path, unit_data_path, mikan_path]
 
     args = vars(parser.parse_args())
     every = args["all"]
