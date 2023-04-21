@@ -10,7 +10,7 @@ env:
 
 jobs:
   # a single job
-  a-job-name:
+  fetch_pcr_data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
