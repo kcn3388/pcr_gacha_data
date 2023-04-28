@@ -26,6 +26,14 @@ def get_data(url: Union[List[str], str], path: Union[List[str], str]):
                 res = requests.get(curr_url, timeout=10, headers=headers, verify=verify).content
             except requests.exceptions.SSLError:
                 res = requests.get(curr_url, timeout=10, headers=headers, verify=False).content
+            except requests.exceptions.ConnectTimeout:
+                try:
+                    res = requests.get(curr_url, timeout=10, headers=headers, verify=verify).content
+                except requests.exceptions.SSLError:
+                    res = requests.get(curr_url, timeout=10, headers=headers, verify=False).content
+                except requests.exceptions.ConnectTimeout:
+                    print(f"{curr_url} time out, skip...")
+                    continue
             if curr_url.endswith(".json"):
                 json_str = json.loads(res.decode("utf-8"))
                 with open(curr_path, 'w+', encoding='utf-8') as file:
@@ -44,6 +52,14 @@ def get_data(url: Union[List[str], str], path: Union[List[str], str]):
             res = requests.get(url, timeout=10, headers=headers, verify=verify).content
         except requests.exceptions.SSLError:
             res = requests.get(url, timeout=10, headers=headers, verify=False).content
+        except requests.exceptions.ConnectTimeout:
+            try:
+                res = requests.get(url, timeout=10, headers=headers, verify=verify).content
+            except requests.exceptions.SSLError:
+                res = requests.get(url, timeout=10, headers=headers, verify=False).content
+            except requests.exceptions.ConnectTimeout:
+                print(f"{url} time out, skip...")
+                return
         if url.endswith(".json"):
             json_str = json.loads(res.decode("utf-8"))
             with open(path, 'w', encoding='utf-8') as file:
